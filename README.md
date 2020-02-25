@@ -9,17 +9,17 @@ Running
 ---
 
 
-### Clone the repo
+### 1. Clone the repo
 
-### Add npm dependencies
+### 2. Add npm dependencies
 
 ``` npm i ``` 
 
-### If you wish to use mongodb locally as service, then run Mongod with mongod in the terminal
+### 3. If you wish to use mongodb locally as service, then run Mongod with mongod in the terminal
 
 ``` mongod --dbpath /your/path ```
 
-### If you wish to use the backend locally, run it with nodemon (dev dependency) or npm start
+### 4. If you wish to use the backend locally, run it with nodemon (dev dependency) or npm start
 
 ``` nodemon ```
 
