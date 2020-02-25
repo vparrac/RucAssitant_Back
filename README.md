@@ -7,19 +7,19 @@ This project uses express, node.js and mongodb for the backend.
 
 Running
 ---
----
 
-## Clone the repo
 
-## Add npm dependencies
+### Clone the repo
+
+### Add npm dependencies
 
 ``` npm i ``` 
 
-## If you wish to use mongodb locally as service, then run Mongod with mongod in the terminal
+### If you wish to use mongodb locally as service, then run Mongod with mongod in the terminal
 
 ``` mongod --dbpath /your/path ```
 
-## If you wish to use the backend locally, run it with nodemon (dev dependency) or npm start
+### If you wish to use the backend locally, run it with nodemon (dev dependency) or npm start
 
 ``` nodemon ```
 
