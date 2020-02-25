@@ -7,4 +7,4 @@ This project uses express, node.js and mongodb for the backend.
 
 To start add npm dependencies
 
-`<addr>` npm i
+`npm i` 
