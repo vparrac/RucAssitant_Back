@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 // Connection URL
-const url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017" || url;
 
 let db;
 
@@ -10,10 +10,9 @@ const dbName = "rucAssistantDB";
 
 // Create a new MongoClient
 
+
 const init = () =>
-  MongoClient.connect(process.env.MONGODB_URI || url, {
-    useNewUrlParser: true,
-  }).then(client => {
+  MongoClient.connect(url, { useUnifiedTopology: true }).then(client => {
     db = client.db(dbName);
   });
 
@@ -66,7 +65,7 @@ const getWithJoin = (
         $lookup: {
           from: fromCollection,
           localField: localField,
-          foreingField: foreingField,
+          foreignField: foreingField,
           as: asName,
         },
       },
@@ -74,8 +73,8 @@ const getWithJoin = (
       {
         $group: {
           _id: "$_id",
-          products: { $push: "$" + localField },
-          productObjects: { $push: "$" + asName },
+          revisiones_id: { $push: "$" + localField },
+          revisiones: { $push: "$" + asName },
         },
       },
     ])

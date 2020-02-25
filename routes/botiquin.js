@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/botiquin/:id", (req, res) => {
   getDocById(req.params.id, "botiquin").then(doc => {
     res.send(doc);
   });
@@ -34,7 +34,7 @@ router.put("/editar/:id", (req, res) => {
   });
 });
 
-router.get("/revisiones", (req, res) => {
+router.get("/revisionesDeBotiquin/", (req, res) => {
   getWithJoin("botiquin", "revision", "revision_id", "_id", "revisiones").then(
     docs => {
       res.send(docs);
