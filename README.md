@@ -21,7 +21,8 @@ Running
 
 ### 4. If you wish to use the backend locally, run it with nodemon (dev dependency) or npm start
 
-```nodemon 
+```
+nodemon 
 npm start
 ```
 
