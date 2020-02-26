@@ -5,8 +5,12 @@ Front repository: https://github.com/vparrac/RucAssitant_Front
 
 This project uses express, node.js and mongodb for the backend.
 
+### Dependencies
+To run this project is necessary have install [Mongo](https://www.mongodb.com/download-center) and [Node](https://nodejs.org/es/)
+
 Running
 ---
+
 
 
 ### 1. Clone the repo
