@@ -1,5 +1,6 @@
 let express = require("express");
 let router = express.Router();
+
 const {
   getDocs,
   insertOneDoc,
@@ -8,34 +9,34 @@ const {
   getWithJoin,
 } = require("../db");
 
-router.get("/", (req, res) => {
+router.get("/", isAuthenticateGerente,(req, res) => {
   getDocs("botiquin").then(docs => {
     res.render("postBotiquin.ejs", { botiquines: docs });
   });
 });
 
-router.get("/dibujarBotiquin", (req, res) => {
+router.get("/dibujarBotiquin", isAuthenticateGerente,(req, res) => {
   getDocs("botiquin").then(docs => {
     res.json(docs);
   });
 });
 
-router.get("/botiquin/:id", (req, res) => {
+router.get("/botiquin/:id",isAuthenticateGerente, (req, res) => {
   getDocById(req.params.id, "botiquin").then(doc => {
     res.json(doc);
   });
 });
 
-router.get("/postPage", (req, res) => {
+router.get("/postPage", isAuthenticateGerente, (req, res) => {
   res.render("postBotiquin.ejs");
 });
 
-router.post("/crear", (req, res) => {
+router.post("/crear", isAuthenticateGerente, (req, res) => {
   const object = req.body;
   insertOneDoc(object, "botiquin").then(response => {
     if (response.insertedCount === 1) {
       getDocs("botiquin").then(docs => {
-        res.render("../public/views/getBotiquin.ejs", { botiquines: docs });
+        res.render("getBotiquin.ejs", { botiquines: docs });
       });
     } else {
       res.send(response);
@@ -43,21 +44,21 @@ router.post("/crear", (req, res) => {
   });
 });
 
-router.get("/asignacionPorMes", (req, res) => {
+router.get("/asignacionPorMes", isAuthenticateGerente,(req, res) => {
   getDocs("botiquin").then(docs => {
     res.render("asignacionPorMes.ejs", { botiquines: docs });
   });
 });
 
-router.put("/editar/:id", (req, res) => {
+router.put("/editar/:id", isAuthenticateGerente,(req, res) => {
   const object = req.body;
-  console.log(object);
+  
   updateDoc(req.params.id, object, "botiquin").then(response => {
     res.send(response);
   });
 });
 
-router.get("/revisionesDeBotiquin/:id", (req, res) => {
+router.get("/revisionesDeBotiquin/:id", isAuthenticateGerente, (req, res) => {
   getWithJoin(
     "botiquin",
     "revision",
@@ -69,5 +70,17 @@ router.get("/revisionesDeBotiquin/:id", (req, res) => {
     res.send(docs);
   });
 });
+
+async function isAuthenticateGerente(req, res, next) {
+  const user = await req.user;
+  if (user) {
+    const gerente = await getDocById(user[0].id, "gerentes");
+    if (req.isAuthenticated() && gerente.length >= 1) return next();    
+  }
+  else{
+    req.flash("signinMessage", "Ingrese sus credenciales para acceder al recurso solicitado"),
+    res.redirect("/authentication/signin");
+  }
+}
 
 module.exports = router;

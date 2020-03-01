@@ -15,9 +15,11 @@ font-family: 'Numans', sans-serif;
     background-color: red;
     color:white;
     opacity: 0.5;
-    width: 400px;
-    height: 30px;
+    width: auto;
+    height: 45px;
     text-align: center;
+    font-size: larger;
+    margin-top: 2px;
 }
 
 .cardLo{
