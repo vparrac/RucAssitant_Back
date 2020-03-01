@@ -25,9 +25,10 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   }),
 );
+app.use(express.static("public"));
 app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
