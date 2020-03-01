@@ -32,7 +32,7 @@ app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
 app.use("/authentication", authenticationRouter);
-app.use("/  ", empleadoRouter);
+app.use("/empleado", empleadoRouter);
 app.use("/gerente", gerenteRouter);
 
 init().then(() => {
