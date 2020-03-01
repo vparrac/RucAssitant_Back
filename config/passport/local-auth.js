@@ -1,16 +1,16 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { insertOneDoc} = require("../../db");
+const { insertOneDoc, getDocById } = require("../../db");
+const bcrypt = require("bcrypt-nodejs");
 
-
-passport.serializeUser((user,done)=>{
-  
-  done(null, {id: user.id});
+passport.serializeUser((user, done) => {
+  //console.log(user);
+  done(null, { id: user.id });
 });
 
-passport.deserializeUser((id,done)=>{
+passport.deserializeUser((user, done) => {
   
-  done(null, {id:id});
+  done(null, getDocById(user.id,"login"));
 });
 
 passport.use(
@@ -21,9 +21,13 @@ passport.use(
       passwordField: "password",
       passReqToCallback: true,
     },
-    async (req, email, password, done) => {      
-      const user = await insertOneDoc({email,password},"login");      
-      done(null,{ email:user.ops[0].email, password: user.ops[0].password});
-    }
-  )
+    async (req, email, password, done) => {
+      const passwordss = bcrypt.hashSync(password);       
+      const user = await insertOneDoc({ email, passwordss }, "login");      
+      done(null, { email: user.ops[0].email, password: passwordss,_id:user.ops[0]._id });   
+      
+      
+    },
+  ),
 );
+

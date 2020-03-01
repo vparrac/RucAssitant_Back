@@ -38,18 +38,14 @@ router.get("/authentication.js", function(req, res) {
  * Método con la petición para crear el registro del usuario
  */
 
-router.post(
-  "/signup",
-  passport.authenticate("local-signup"),
-  (req, res) => {
-    // Successful authentication redirects home.
-    console.log("sad");
-    res.redirect("/authentication/profile");
-  },
-);
+router.post("/signup", passport.authenticate("local-signup"), (req, res) => {
+  // Successful authentication redirects home.
+  
+  res.redirect("/authentication/profile");
+});
 
 router.get("/profile", (req, res) => {
-  console.log(req.body);
+  
   res.send("in");
 });
 

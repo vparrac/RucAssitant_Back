@@ -1,6 +1,6 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const bcrypt = require("bcrypt-nodejs");
-const { collections } = require("./collections");
+
+
 // Connection URL
 const url = "mongodb://localhost:27017" || url;
 
@@ -90,23 +90,6 @@ const pushRevision = (id, revisionId) => {
   );
 };
 
-/**
- * Método que permite cifrar la contraseña
- * Este método utiliza la librería bcrypt y ejecuta el algoritmo de encriptado 10 veces
- * @param {*} password
- */
-const encryptPassword = password =>
-  bcrypt.hashSync(password, bcrypt.genSalt(10));
-
-const getLogin = login => {
-  const collection = db.collection(collections.login);
-  return collection.find({ login: login });
-};
-
-const comparePassword = (login, password) =>
-  bcrypt.compareSync(password, getLogin(login));
-
-
 module.exports = {
   init,
   insertOneDoc,
@@ -116,6 +99,5 @@ module.exports = {
   updateDoc,
   getWithJoin,
   pushRevision,
-  encryptPassword,
-  comparePassword,
+
 };
