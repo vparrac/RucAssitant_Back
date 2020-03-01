@@ -53,15 +53,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
+            <% if (!user) { %> 
             <li class="nav-item">
                 <a class="nav-link" href="/authentication/signup">Registrate<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/authentication/signin">Ingresa<span class="sr-only"></span></a>
             </li>
+            <% } %>
             <% if (user) { %> 
+            
             <li class="nav-item">
-                <a class="nav-link" href="#">Logout<span class="sr-only"></span></a>
+                <a class="nav-link" href="/authentication/logout">Salir<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/botiquin/postPage">Registrar botiquin<span class="sr-only"></span></a>
@@ -73,6 +77,7 @@
                 <a class="nav-link" href="/botiquin/asignacionPorMes">Asignación botiquin por mes</a>
             </li>
             <% } %>
+         
         </ul>
     </div>
 </nav>

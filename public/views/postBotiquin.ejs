@@ -1,88 +1,87 @@
-<%- layout('navBar') %>
+<%- layout('profiles') %>
 
-  <div class="col-12 col-sm-12 col-lg-12 col-xl-12">
-    <form id="botiquinFormA" action="/botiquin/crear" method="post">
-      <div class="form-group">
-        <label id="nombre">
-          <span>Nombre:</span>
-          <input class="form-control" type="text" name="nombre">
+    <h1> Creación de un botiquín reglamentario</h1>
+    <form action="/botiquin/crear" method="POST">      
+        <div class="form-group">
+        <label id="nombre"> Nombre                 
         </label>
+        <input type="text" name="nombre" class="form-control" aria-label="Small" aria-describedby="inputG roup-sizing-sm">
       </div>
+      
       <div class="form-group">
         <label id="gasas">
-          <span>Gasas:</span>
-          <input class="form-control" value="20" type="text" name="gasas" readonly>
+          <span>Gasas:</span>          
         </label>
+        <input class="form-control" value="20" type="text" name="gasas" readonly>
       </div>
       <div class="form-group">
         <label id="esparadrapo4Metros">
-          <span>Esparadrapo 4 metros:</span>
-          <input class="form-control" value="1" type="text" name="esparadrapo4Metros" readonly>
+          <span>Esparadrapo 4 metros:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="esparadrapo4Metros" readonly>
       </div>
       <div class="form-group">
         <label id="bajaLenguas">
-          <span>Baja lenguas:</span>
-          <input class="form-control" value="20" type="text" name="bajaLenguas"  readonly>
+          <span>Baja lenguas:</span>          
         </label>
+        <input class="form-control" value="20" type="text" name="bajaLenguas"  readonly>
       </div>
       <div class="form-group">
         <label id="guantesLatex">
-          <span>Guantes de latex:</span>
-          <input class="form-control" value="100" type="text" name="guantesLatex"  readonly>
+          <span>Guantes de latex:</span>          
         </label>
+        <input class="form-control" value="100" type="text" name="guantesLatex"  readonly>
       </div>
       <div class="form-group">
         <label id="vendaEl2x5">
-          <span>Venda elástica 2 x 5:</span>
-          <input class="form-control" value="1" type="text" name="vendaEl2x5"  readonly>
+          <span>Venda elástica 2 x 5:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="vendaEl2x5"  readonly>
       </div>
       <div class="form-group">
         <label id="vendaEl3x5">
-          <span>Venda elástica 3 x 5 yardas:</span>
-          <input class="form-control" value="1" type="text" name="vendaEl3x5"  readonly>
+          <span>Venda elástica 3 x 5 yardas:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="vendaEl3x5"  readonly>
       </div>
       <div class="form-group">
         <label id="vendaEl5x5">
-          <span>Venda elástica 5 x 5 yardas:</span>
-          <input class="form-control" value="1" type="text" name="vendaEl5x5"  readonly>
+          <span>Venda elástica 5 x 5 yardas:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="vendaEl5x5"  readonly>
       </div>
       <div class="form-group">
         <label id="vendaAl3x5">
-          <span>Venda algodon 3 x 5 yardas:</span>
-          <input class="form-control" value="2" type="text" name="vendaAl3x5"  readonly>
+          <span>Venda algodon 3 x 5 yardas:</span>          
         </label>
+        <input class="form-control" value="2" type="text" name="vendaAl3x5"  readonly>
       </div>
       <div class="form-group">
         <label id="yodopovidona120">
-          <span>Yodopovidona 120 ml (Jabón quirúrgico):</span>
-          <input class="form-control" value="1" type="text" name="yodopovidona120"  readonly>
+          <span>Yodopovidona 120 ml (Jabón quirúrgico):</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="yodopovidona120"  readonly>
       </div>
       <div class="form-group">
         <label id="solucionSal">
-          <span>Solución salina 250 cc o 500 cc:</span>
-          <input class="form-control" value="2" type="text" name="solucionSal"  readonly>
+          <span>Solución salina 250 cc o 500 cc:</span>          
         </label>
+        <input class="form-control" value="2" type="text" name="solucionSal"  readonly>
       </div>
       <div class="form-group">
         <label id="termometro">
-          <span>Termómetro de mercurio o digital:</span>
-          <input class="form-control" value="1" type="text" name="termometro"  readonly>
+          <span>Termómetro de mercurio o digital:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="termometro"  readonly>
       </div>
       <div class="form-group">
         <label id="alcohol">
-          <span>Alcohol antiséptico 275 ml:</span>
-          <input class="form-control" value="1" type="text" name="alcohol"  readonly>
+          <span>Alcohol antiséptico 275 ml:</span>          
         </label>
+        <input class="form-control" value="1" type="text" name="alcohol"  readonly>
       </div>
       <div class="form-group">
       <button type="submit" class="btn btn-dark">Registrar botiquin</button>
     </div>
     </form>
-
-  </div>
+  

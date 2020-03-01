@@ -14,7 +14,7 @@ const path = require("path");
 
 const passport = require("passport");
 
-const { getDocById } = require("../db");
+const { getGerenteByEmail } = require("../db");
 
 /**
  * Método para mostrar el formulario de registro
@@ -75,18 +75,26 @@ router.use((req, res, next) => {
 });
 
 router.get("/profile", isAuthenticateGerente, (req, res) => {
-  res.send("gerente");
+  res.render("postBotiquin");
 });
 
 async function isAuthenticateGerente(req, res, next) {
   const user = await req.user;
+  
   if (user) {
-    const gerente = await getDocById(user[0].id, "gerentes");
+    const gerente = await getGerenteByEmail(user[0].email);
+    //console.log(gerente);
     if (req.isAuthenticated() && gerente.length >= 1) return next();
+    else {
+      req.flash("signinMessage", "Credenciales no validas"),
+      res.redirect("/authentication/signin");
+      return;
+    }
+  } else {
     req.flash("signinMessage", "Credenciales no validas"),
     res.redirect("/authentication/signin");
+    return;
   }
-  next();
 }
 
 //async function isAuthenticateEmpleado(req, res, next) {
