@@ -1,16 +1,71 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">RucAssistant</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/getBotiquin.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+    <!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="./authentication/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="../javascripts/getBotiquin.js"></script>
+
+
+</head>
+
+    
+    
+    
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #df9f29;">
+    <a class="navbar-brand" href="/">Assitente para el RUC</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
+            <% if (!user) { %> 
             <li class="nav-item">
-                <a class="nav-link" href="#">Login<span class="sr-only"></span></a>
+                <a class="nav-link" href="/authentication/signup">Registrate<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Logout<span class="sr-only"></span></a>
+                <a class="nav-link" href="/authentication/signin">Ingresa<span class="sr-only"></span></a>
+            </li>
+            <% } %>
+            <% if (user && !nombreEmpresa) { %> 
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/authentication/logout">Salir<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/botiquin/postPage">Registrar botiquin<span class="sr-only"></span></a>
@@ -21,6 +76,34 @@
             <li class="nav-item">
                 <a class="nav-link" href="/botiquin/asignacionPorMes">Asignación botiquin por mes</a>
             </li>
+            <% } %>
+         
         </ul>
     </div>
 </nav>
+<%- body %>
+
+<nav class="container-fluid">   
+    <div class="row">
+        <div id="cardL-footer">
+            <hr>
+            <h6>Assitente para el RUC- Desarrollo de aplicaciones web</h6>
+        </div>
+        <br>    
+    </div> 
+    
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<script src="../javascripts/asignacionPorMes.js"></script>
+</body>

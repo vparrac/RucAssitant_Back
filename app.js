@@ -124,10 +124,22 @@ app.use(
 app.use((req, res, next) => {
   app.locals.signupMessage = req.flash("signupMessage");
   app.locals.signinMessage = req.flash("signinMessage");
-  app.locals.user = req.user;
-  
+  app.locals.user = req.user;  
+  app.locals.nombreEmpresa= esGerente(req);
   next();
 });
+const esGerente = (req)=>{
+  if(req.user){
+    if(req.user.nombreEmpresa){
+      return true;
+    }
+    else{
+      return false;
+    }
+  } else{
+    return false;
+  }
+};
 
 /**
  * Se configuran los paths de la aplicación

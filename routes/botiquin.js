@@ -1,5 +1,6 @@
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const router = express.Router();
+const { getGerenteByEmail, getBotiquinesByGerente } = require("../db");
 const {
   getDocs,
   insertOneDoc,
@@ -8,34 +9,43 @@ const {
   getWithJoin,
 } = require("../db");
 
-router.get("/", (req, res) => {
+router.get("/", isAuthenticateGerente, (req, res) => {
   getDocs("botiquin").then(docs => {
-    res.render("postBotiquin.ejs", { botiquines: docs });
+    res.render("getBotiquin.ejs", { botiquines: docs });
   });
 });
 
-router.get("/dibujarBotiquin", (req, res) => {
+router.get("/dibujarBotiquin", isAuthenticateGerente, (req, res) => {
+  //console.log("dibujar");
   getDocs("botiquin").then(docs => {
     res.json(docs);
   });
 });
 
-router.get("/botiquin/:id", (req, res) => {
+router.get("/botiquin/:id", isAuthenticateGerente, (req, res) => {
   getDocById(req.params.id, "botiquin").then(doc => {
     res.json(doc);
   });
 });
 
-router.get("/postPage", (req, res) => {
+router.get("/postPage", isAuthenticateGerente, (req, res) => {
   res.render("postBotiquin.ejs");
 });
 
-router.post("/crear", (req, res) => {
-  const object = req.body;
+router.post("/crear", isAuthenticateGerente, async (req, res) => {
+  
+
+  const gerente = await req.user;
+  
+  
+  const object = { ...req.body, idgerente: gerente[0]._id };
+
+  
   insertOneDoc(object, "botiquin").then(response => {
+    
     if (response.insertedCount === 1) {
-      getDocs("botiquin").then(docs => {
-        res.render("../public/views/getBotiquin.ejs", { botiquines: docs });
+      getBotiquinesByGerente(gerente[0]._id).then(docs => {
+        res.render("getBotiquin.ejs", { botiquines: docs });
       });
     } else {
       res.send(response);
@@ -43,21 +53,22 @@ router.post("/crear", (req, res) => {
   });
 });
 
-router.get("/asignacionPorMes", (req, res) => {
-  getDocs("botiquin").then(docs => {
+router.get("/asignacionPorMes", isAuthenticateGerente, async (req, res) => {
+  const gerente = await req.user;
+  getBotiquinesByGerente(gerente[0]._id).then(docs => {
     res.render("asignacionPorMes.ejs", { botiquines: docs });
   });
 });
 
-router.put("/editar/:id", (req, res) => {
+router.put("/editar/:id", isAuthenticateGerente, (req, res) => {
   const object = req.body;
-  console.log(object);
+
   updateDoc(req.params.id, object, "botiquin").then(response => {
     res.send(response);
   });
 });
 
-router.get("/revisionesDeBotiquin/:id", (req, res) => {
+router.get("/revisionesDeBotiquin/:id", isAuthenticateGerente, (req, res) => {
   getWithJoin(
     "botiquin",
     "revision",
@@ -69,5 +80,24 @@ router.get("/revisionesDeBotiquin/:id", (req, res) => {
     res.send(docs);
   });
 });
+
+async function isAuthenticateGerente(req, res, next) {
+  const user = await req.user;
+
+  if (user) {
+    const gerente = await getGerenteByEmail(user[0].email);
+   // console.log(gerente);
+    if (req.isAuthenticated() && gerente.length >= 1) return next();
+    else {
+      req.flash("signinMessage", "Credenciales no validas"),
+        res.redirect("/authentication/signin");
+      return;
+    }
+  } else {
+    req.flash("signinMessage", "Credenciales no validas"),
+      res.redirect("/authentication/signin");
+    return;
+  }
+}
 
 module.exports = router;

@@ -39,6 +39,11 @@ const getDocById = (id, dbCollection) => {
     .toArray();
 };
 
+
+const getBotiquinesByGerente = (idGerente)=>{
+  const collection= db.collection("botiquin");
+  return collection.find({idgerente: ObjectId(idGerente)}).toArray();
+};
 const updateDoc = (id, object, dbCollection) => {
   const collection = db.collection(dbCollection);
   return collection.replaceOne(
@@ -108,6 +113,15 @@ const getLoginByEmail = (login) => {
     })
     .toArray();
 };
+
+const getGerenteByEmail = (login) => {
+  const collection = db.collection("gerentes");
+  return collection
+    .find({
+      email: login
+    })
+    .toArray();
+};
 const pushEmpleado = (id, empleadoId) => {
   const collection = db.collection("gerentes");
   return collection.update(
@@ -128,5 +142,7 @@ module.exports = {
   pushRevision,
   getLoginByName,
   getLoginByEmail,
-  pushEmpleado
+  pushEmpleado,
+  getGerenteByEmail,
+  getBotiquinesByGerente
 };

@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt-nodejs");
 
 passport.serializeUser((user, done) => {
   //console.log("s");
-  console.log(user[0]._id);
+  //console.log(user[0]._id);
   done(null, { id: user[0]._id });
 });
 
@@ -41,9 +41,9 @@ passport.use(
           { email, nombreEmpresa, contacto },
           "gerentes",
         );
-
-        if (gerente.length>=1) {
-          const user = await insertOneDoc({ email, passwordss }, "login");
+          
+        if (gerente) {
+          const user = await insertOneDoc({ email, passwordss }, "login");          
           done(null, [
             {
               email: user.ops[0].email,
@@ -74,7 +74,7 @@ passport.use(
     },
     async (req, email, password, done) => {
       const userdb = await getLoginByName(email);
-      //console.log(userdb);
+      console.log(userdb);
       if (userdb.length < 1) {
         //console.log("email no encontrado");
         //console.log(req);
@@ -83,6 +83,7 @@ passport.use(
           false,
           req.flash("signinMessage", "Usuario no encontrado "),
         );
+        
       } else if (!bcrypt.hashSync(password) == userdb.password) {
         //console.log("contraseña incorrecta");
         return done(
