@@ -10,10 +10,6 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
-.container{
-height: 100%;
-align-content: center;
-}
 
 .red {
     background-color: red;
@@ -40,6 +36,13 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
+.singCard{
+    
+    width: 80%;    
+    padding: 8px;
+    border: 1px solid green;
+}
+
 .cardL-header h3{
 margin-top: 25px;
 margin-left: 15px;
@@ -53,6 +56,10 @@ top: -45px;
 }
 
 #cardL-footer{
+    
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
 }
 
@@ -86,4 +93,25 @@ color: white;
 
 .links a{
 margin-left: 4px;
+}
+
+#greenBackground{
+    background-color: rgb(31, 128, 31);
+}
+
+#fontSizeLarger{
+    font-size: larger;
+    text-align: justify;
+}
+
+#greenFont{
+    color: rgb(31, 128, 31);
+}
+.tittle{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: x-large ;
+    text-align: center;
+    font-family: 'Lobster';
+    color: rgb(31, 128, 31);
 }

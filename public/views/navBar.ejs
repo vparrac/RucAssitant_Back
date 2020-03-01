@@ -1,5 +1,38 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">RucAssistant</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/getBotiquin.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+    <!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet"> 
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="./authentication/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+    
+    
+    
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #df9f29;">
+    <a class="navbar-brand" href="/">Assitente para el RUC</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,8 +40,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Login<span class="sr-only"></span></a>
+                <a class="nav-link" href="/authentication/signup">Registrate<span class="sr-only"></span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/authentication/signin">Ingresa<span class="sr-only"></span></a>
+            </li>
+            <% if (user) { %> 
             <li class="nav-item">
                 <a class="nav-link" href="#">Logout<span class="sr-only"></span></a>
             </li>
@@ -21,6 +58,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="/botiquin/asignacionPorMes">Asignación botiquin por mes</a>
             </li>
+            <% } %>
         </ul>
     </div>
 </nav>
+<%- body %>
+
+<nav class="container-fluid">   
+    <div class="row">
+        <div id="cardL-footer">
+            <hr>
+            <h6>Assitente para el RUC- Desarrollo de aplicaciones web</h6>
+        </div>
+        <br>    
+    </div> 
+    
+</nav>
+
+</body>

@@ -80,16 +80,18 @@ router.get("/profile", isAuthenticateGerente, (req, res) => {
 
 async function isAuthenticateGerente(req, res, next) {
   const user = await req.user;
-  
-  const gerente = await getDocById(user[0].id,"gerentes");  
-  if (req.isAuthenticated()&&gerente.length>=1) return next();
-  req.flash("signinMessage", "Credenciales no validas"),
-  res.redirect("/authentication/signin");
+  if (user) {
+    const gerente = await getDocById(user[0].id, "gerentes");
+    if (req.isAuthenticated() && gerente.length >= 1) return next();
+    req.flash("signinMessage", "Credenciales no validas"),
+    res.redirect("/authentication/signin");
+  }
+  next();
 }
 
 //async function isAuthenticateEmpleado(req, res, next) {
 //  const user = await req.user;
-//  const empleado = await getDocById(user[0].id,"empleados");  
+//  const empleado = await getDocById(user[0].id,"empleados");
 //  if (req.isAuthenticated()&&empleado.length>=1) return next();
 //  req.flash("signinMessage", "Credenciales no validas"),
 //  res.redirect("/authentication/signin");
