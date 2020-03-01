@@ -10,7 +10,6 @@ const dbName = "rucAssistantDB";
 
 // Create a new MongoClient
 
-
 const init = () =>
   MongoClient.connect(url, { useUnifiedTopology: true }).then(client => {
     db = client.db(dbName);
@@ -56,10 +55,12 @@ const getWithJoin = (
   localField,
   foreingField,
   asName,
+  id,
 ) => {
   const collection = db.collection(dbcollection);
   return collection
     .aggregate([
+      { $match: { _id: ObjectId(id) } },
       { $unwind: "$" + localField },
       {
         $lookup: {
@@ -83,7 +84,7 @@ const getWithJoin = (
 
 const pushRevision = (id, revisionId) => {
   const collection = db.collection("botiquin");
-  return collection.update(
+  return collection.updateOne(
     { _id: ObjectId(id) },
     { $push: { revision_id: revisionId } },
     { upsert: true },

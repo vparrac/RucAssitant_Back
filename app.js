@@ -1,20 +1,21 @@
-var express = require("express");
-var port = process.env.port || 3000;
-var indexRouter = require("./routes/index");
-var botiquinRouter = require("./routes/botiquin.js");
-var revisionRouter = require("./routes/revision");
-var bodyParser = require("body-parser");
+let express = require("express");
+let port = process.env.port || 3000;
+let indexRouter = require("./routes/index");
+let botiquinRouter = require("./routes/botiquin.js");
+let revisionRouter = require("./routes/revision");
+let bodyParser = require("body-parser");
 
-var { init } = require("./db");
+let { init } = require("./db");
 
-var app = express();
+let app = express();
 
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   }),
 );
+app.use(express.static("public"));
 app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
