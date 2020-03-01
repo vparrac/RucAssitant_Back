@@ -91,6 +91,23 @@ const pushRevision = (id, revisionId) => {
   );
 };
 
+const getLoginByName = (login) => {
+  const collection = db.collection("login");
+  return collection
+    .find({
+      email: login
+    })
+    .toArray();
+};
+
+const getLoginByEmail = (login) => {
+  const collection = db.collection("empleados");
+  return collection
+    .find({
+      email: login
+    })
+    .toArray();
+};
 const pushEmpleado = (id, empleadoId) => {
   const collection = db.collection("gerentes");
   return collection.update(
@@ -109,5 +126,7 @@ module.exports = {
   updateDoc,
   getWithJoin,
   pushRevision,
+  getLoginByName,
+  getLoginByEmail,
   pushEmpleado
 };

@@ -10,7 +10,7 @@ const {
 
 router.get("/", (req, res) => {
   getDocs("botiquin").then(docs => {
-    res.render("../public/views/getBotiquin.ejs", { botiquines: docs });
+    res.render("postBotiquin.ejs", { botiquines: docs });
   });
 });
 
@@ -27,7 +27,7 @@ router.get("/botiquin/:id", (req, res) => {
 });
 
 router.get("/postPage", (req, res) => {
-  res.render("../public/views/postBotiquin.ejs");
+  res.render("postBotiquin.ejs");
 });
 
 router.post("/crear", (req, res) => {
@@ -45,7 +45,7 @@ router.post("/crear", (req, res) => {
 
 router.get("/asignacionPorMes", (req, res) => {
   getDocs("botiquin").then(docs => {
-    res.render("../public/views/asignacionPorMes.ejs", { botiquines: docs });
+    res.render("asignacionPorMes.ejs", { botiquines: docs });
   });
 });
 
