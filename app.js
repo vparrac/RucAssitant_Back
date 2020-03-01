@@ -49,6 +49,9 @@ const path = require("path");
 /**
  * Dependencia al archivo que hace todo el manejo de la base de datos
  */
+const empleadoRouter = require("./routes/empleado");
+const gerenteRouter = require("./routes/gerente");
+
 const { init } = require("./db");
 
 /**
@@ -114,7 +117,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   }),
 );
 
@@ -129,10 +132,13 @@ app.use((req, res, next) => {
 /**
  * Se configuran los paths de la aplicación
  */
+app.use(express.static("public"));
 app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
 app.use("/authentication", authenticationRouter);
+app.use("/empleado", empleadoRouter);
+app.use("/gerente", gerenteRouter);
 
 init().then(() => {
   app.listen(port, function() {});

@@ -1,0 +1,26 @@
+.fa-search{
+    color: white;
+}
+
+#tableDetalle{
+    display: none;
+}
+
+.fa-refresh{
+    color: white;
+}
+
+#detalle{
+    margin-top: 5px;
+    margin-right: 7px;
+}
+
+#reabastecer{
+    margin-top: 5px;
+}
+
+.table-inline{
+    padding-top: 5px;
+    display: inline-table;
+}
+

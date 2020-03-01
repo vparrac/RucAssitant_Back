@@ -55,10 +55,12 @@ const getWithJoin = (
   localField,
   foreingField,
   asName,
+  id,
 ) => {
   const collection = db.collection(dbcollection);
   return collection
     .aggregate([
+      { $match: { _id: ObjectId(id) } },
       { $unwind: "$" + localField },
       {
         $lookup: {
@@ -82,7 +84,7 @@ const getWithJoin = (
 
 const pushRevision = (id, revisionId) => {
   const collection = db.collection("botiquin");
-  return collection.update(
+  return collection.updateOne(
     { _id: ObjectId(id) },
     { $push: { revision_id: revisionId } },
     { upsert: true },
@@ -106,6 +108,15 @@ const getLoginByEmail = (login) => {
     })
     .toArray();
 };
+const pushEmpleado = (id, empleadoId) => {
+  const collection = db.collection("gerentes");
+  return collection.update(
+    { _id: ObjectId(id) },
+    { $push: { empleados: empleadoId } },
+    { upsert: true },
+  );
+};
+
 module.exports = {
   init,
   insertOneDoc,
@@ -116,5 +127,6 @@ module.exports = {
   getWithJoin,
   pushRevision,
   getLoginByName,
-  getLoginByEmail
+  getLoginByEmail,
+  pushEmpleado
 };
