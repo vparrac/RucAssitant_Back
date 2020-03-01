@@ -14,6 +14,12 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/dibujarBotiquin", (req, res) => {
+  getDocs("botiquin").then(docs => {
+    res.json(docs);
+  });
+});
+
 router.get("/botiquin/:id", (req, res) => {
   getDocById(req.params.id, "botiquin").then(doc => {
     res.json(doc);
@@ -45,6 +51,7 @@ router.get("/asignacionPorMes", (req, res) => {
 
 router.put("/editar/:id", (req, res) => {
   const object = req.body;
+  console.log(object);
   updateDoc(req.params.id, object, "botiquin").then(response => {
     res.send(response);
   });

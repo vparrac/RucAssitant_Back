@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-let express = require("express");
-let port = process.env.port || 3000;
-let indexRouter = require("./routes/index");
-let botiquinRouter = require("./routes/botiquin.js");
-let revisionRouter = require("./routes/revision");
-let bodyParser = require("body-parser");
-
-let { init } = require("./db");
-
-let app = express();
-=======
 const express = require("express");
 const morgan = require("morgan");
 
@@ -33,7 +21,6 @@ const app = express();
 
 //Middlewares
 app.use(morgan("dev"));
->>>>>>> 63f810123339c1b03bce18be59c43fb4d5a7c321
 
 app.use(bodyParser.json());
 app.use(

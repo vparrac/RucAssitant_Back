@@ -68,15 +68,94 @@ const showRevisiones = revisiones => {
         "</td> <td>" +
         revision.solucionSal.estado +
         "</td> <td>" +
-        revision.termometro.cantidad + 
+        revision.termometro.cantidad +
         "</td> <td>" +
-        revision.termometro.estado + 
+        revision.termometro.estado +
         "</td> <td>" +
-        revision.alcohol.cantidad + 
+        revision.alcohol.cantidad +
         "</td> <td>" +
-        revision.alcohol.estado + 
+        revision.alcohol.estado +
         "</td>" +
         "</tr>";
     });
   }
+};
+
+const reabastecer = botiquinId => {
+  fetch("/botiquin/botiquin/" + botiquinId)
+    .then(res => res.json())
+    .then(reabastecerBotiquin);
+};
+
+const reabastecerBotiquin = botiquin => {
+  const reabastecido = {
+    nombre: botiquin[0].nombre,
+    gasas: "20",
+    esparadrapo4Metros: "1",
+    bajaLenguas: "20",
+    guantesLatex: "100",
+    vendaEl2x5: "1",
+    vendaEl3x5: "1",
+    vendaEl5x5: "1",
+    vendaAl3x5: "2",
+    yodopovidona120: "1",
+    solucionSal: "2",
+    termometro: "1",
+    alcohol: "1",
+  };
+  fetch("/botiquin/editar/" + botiquin[0]._id, {
+    method: "PUT",
+    body: JSON.stringify(reabastecido),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(res => res.json())
+    .then(showTableData);
+};
+
+const showTableData = data => {
+  if (data.nModified === 1) {
+    fetch("/botiquin/dibujarBotiquin")
+      .then(res => res.json())
+      .then(drawData);
+  }
+};
+
+const drawData = data => {
+  const tableBody = document.querySelector("#botiquinData");
+  tableBody.innerHTML = "";
+  data.forEach(botiquin => {
+    tableBody.innerHTML +=
+      "<tr> <td>" +
+      botiquin.nombre + 
+      "</td> <td>" +
+      botiquin.gasas +
+      "</td> <td>" +
+      botiquin.esparadrapo4Metros +
+      "</td> <td>" +
+      botiquin.bajaLenguas +
+      "</td> <td>" +
+      botiquin.guantesLatex +
+      "</td> <td>" +
+      botiquin.vendaEl2x5 +
+      "</td> <td>" +
+      botiquin.vendaEl3x5 +
+      "</td> <td>" +
+      botiquin.vendaEl5x5 +
+      "</td> <td>" +
+      botiquin.vendaAl3x5 +
+      "</td> <td>" +
+      botiquin.yodopovidona120 +
+      "</td> <td>" +
+      botiquin.solucionSal +
+      "</td> <td>" +
+      botiquin.termometro +
+      "</td> <td>" +
+      botiquin.alcohol +
+      "</td> <td class='table-inline'>" +
+      "<button id='detalle' class='btn btn-primary' onclick='mostrarDetalle(" + botiquin._id + ")'><i class='fa fa-search'></i></button>" + 
+      "<button id='reabastecer' class='btn btn-primary' onclick='reabastecer(" + botiquin._id + ")'><i class='fa fa-refresh'></i></button>" +
+      "</td> </tr>";
+  });
 };
