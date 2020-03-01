@@ -98,6 +98,14 @@ const getLoginByName = (login) => {
     .toArray();
 };
 
+const getLoginByEmail = (login) => {
+  const collection = db.collection("empleados");
+  return collection
+    .find({
+      email: login
+    })
+    .toArray();
+};
 module.exports = {
   init,
   insertOneDoc,
@@ -107,5 +115,6 @@ module.exports = {
   updateDoc,
   getWithJoin,
   pushRevision,
-  getLoginByName
+  getLoginByName,
+  getLoginByEmail
 };
