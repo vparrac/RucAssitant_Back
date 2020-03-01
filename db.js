@@ -90,6 +90,15 @@ const pushRevision = (id, revisionId) => {
   );
 };
 
+const pushEmpleado = (id, empleadoId) => {
+  const collection = db.collection("gerentes");
+  return collection.update(
+    { _id: ObjectId(id) },
+    { $push: { empleados: empleadoId } },
+    { upsert: true },
+  );
+};
+
 module.exports = {
   init,
   insertOneDoc,
@@ -99,4 +108,5 @@ module.exports = {
   updateDoc,
   getWithJoin,
   pushRevision,
+  pushEmpleado
 };
