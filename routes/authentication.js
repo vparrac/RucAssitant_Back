@@ -16,7 +16,7 @@ const passport = require("passport");
 /**
  * Método para mostrar el formulario de registro
  */
-router.get("/singup", (req, res) => {
+router.get("/signup", (req, res) => {
   res.render(path.join(__dirname, "../public/views", "singup.ejs"));
 });
 
@@ -38,11 +38,19 @@ router.get("/authentication.js", function(req, res) {
  * Método con la petición para crear el registro del usuario
  */
 
-router.post("/signup", passport.authenticate("local-signup"), (req, res) => {
-  // Successful authentication redirects home.
-  
-  res.redirect("/authentication/profile");
-});
+router.post("/signup", passport.authenticate("local-signup",{
+  successRedirect: "/authentication/signin",
+  failureRedirect: "/authentication/signup",
+  passReqToCallback: true
+})
+);
+
+router.post("/signin", passport.authenticate("local-signin",{
+  successRedirect: "/authentication/profile",
+  failureRedirect: "/authentication/signin",
+  passReqToCallback: true
+})
+);
 
 router.get("/profile", (req, res) => {
   
@@ -53,7 +61,7 @@ router.get("/profile", (req, res) => {
  * Mètodo para obtener el formularo de login
  */
 router.get("/signin", (req, res) => {
-  res.send("Hello World!");
+  res.render(path.join(__dirname, "../public/views", "singin.ejs"));
 });
 
 module.exports = router;

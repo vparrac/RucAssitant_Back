@@ -5,7 +5,7 @@ const express = require("express");
 /**
  * Middleware que nos permite ver las peticiones REST
  */
-//const morgan = require("morgan");
+const morgan = require("morgan");
 /**
  * Sistema de plantillas utilziado
  */
@@ -31,6 +31,7 @@ const session = require("express-session");
  * Primero se valida la existencia de la constante global sino se va al puerto 3000
  */
 const port = process.env.PORT || 3000;
+
 /**
  * ----Routes-----
  */
@@ -61,7 +62,7 @@ const app = express();
  * Este middleware nos permite ver las peticiones REST en consola
  * es especialmente útil para la etapa de desarrollo
  */
-//app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 /**
  * Esta configuración nos permite recibir los datos desde el cliente
@@ -70,7 +71,6 @@ const app = express();
  */
 app.use(express.urlencoded({ extended: false }));
 
-app.use(flash());
 /**
  * Le decimos a la aplicación que usará el modulo que nos permite manejar sesiones
  */
@@ -83,6 +83,10 @@ app.use(
 );
 
 /**
+ * Modulo para poder enviar mensajes de autenticación
+ */
+app.use(flash());
+/**
  * Este método se encarga de inicializar passport para poder usarlo
  */
 app.use(passport.initialize());
@@ -90,6 +94,10 @@ app.use(passport.initialize());
  * Esto nos permite manejar sesiones desde passport
  */
 app.use(passport.session());
+
+/**
+ * Para que el
+ */
 
 require("./config/passport/local-auth");
 //Settings
@@ -109,6 +117,12 @@ app.use(
     extended: true,
   }),
 );
+
+app.use((req, res, next) => {
+  app.locals.signupMessage = req.flash("signupMessage");
+  app.locals.signinMessage = req.flash("signinMessage");
+  next();
+});
 
 /**
  * Se configuran los paths de la aplicación

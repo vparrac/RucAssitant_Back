@@ -21,73 +21,43 @@
 <body>
 <div class="container">
 	
-	
-	
 	<div class="d-flex justify-content-center h-100">
-		
-		
-			
-		
-		<div class="cardL">
-
-			
-			
-			<div class="cardL-header">
-				<h3>Registrarse</h3>				
+		<div class="cardLo">
+		<div class="cardL-header">
+			<h3>Ingresar</h3>				
 			</div>
 			<div class="card-body">
-				<form method="POST" action="signup">
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="far fa-building"></i></i></span>							
-						</div>
-						<input type="text" class="form-control" name="nombreEmpresa" placeholder="Nombre empresa" required>						
-					</div> 
+				<form method="POST" action="signin">
+					
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 						</div>
 						<input type="email" class="form-control" name="correo" placeholder="Correo" required>						
 					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" name="contacto" placeholder="Nombre contacto" required>						
-					</div>
+					
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
 						<input type="password" class="form-control" name="password" placeholder="Contraseña" onkeyup="check();" required>
 					</div>	
+							
 					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="password" class="form-control" name="confirmPassword"  onkeyup="check();" placeholder="Confirmar contraseña" required>
-					</div>			
-					<div class="input-group form-group">
-						<input type="submit" value="Registro" class="btn float-right login_btn">
+						<input type="submit" value="Ingreso" class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>
 			<div class="cardL-header">
-				<% if (signupMessage!="") {
+				<% if (signinMessage!="") {
 					%>
 					<div >					
 						<div class="red">					  
-						  <p class="card-text"><%= signupMessage%></p>
+						  <p class="card-text"><%= signinMessage%></p>
 						</div>
 					  </div>
 					<% } %>				
 			</div>
-			
-			<div>				
-					<a<br>¿Ya tienes una cuenta?</a<br>
-					<a href="/authentication/signin"> Ingresa</a>				
-			</div>
-			
 		</div>
 	</div>
 </div>

@@ -15,15 +15,34 @@ height: 100%;
 align-content: center;
 }
 
-.card{
-height: 450px;
+.red {
+    background-color: red;
+    color:white;
+    opacity: 0.5;
+    width: 400px;
+    height: 30px;
+    text-align: center;
+}
+
+.cardLo{
+    height: 270px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+.cardL{
+height: 420px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.card-header h3{
+.cardL-header h3{
+margin-top: 25px;
+margin-left: 15px;
 color: white;
 }
 
@@ -31,6 +50,10 @@ color: white;
 position: absolute;
 right: 20px;
 top: -45px;
+}
+
+#cardL-footer{
+    text-align: center;
 }
 
 .input-group-prepend span{

@@ -1,6 +1,5 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
-
 // Connection URL
 const url = "mongodb://localhost:27017" || url;
 
@@ -90,6 +89,15 @@ const pushRevision = (id, revisionId) => {
   );
 };
 
+const getLoginByName = (login) => {
+  const collection = db.collection("login");
+  return collection
+    .find({
+      email: login
+    })
+    .toArray();
+};
+
 module.exports = {
   init,
   insertOneDoc,
@@ -99,5 +107,5 @@ module.exports = {
   updateDoc,
   getWithJoin,
   pushRevision,
-
+  getLoginByName
 };
