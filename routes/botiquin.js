@@ -16,7 +16,7 @@ router.get("/", isAuthenticateGerente, (req, res) => {
 });
 
 router.get("/dibujarBotiquin", isAuthenticateGerente, (req, res) => {
-  console.log("dibujar");
+  //console.log("dibujar");
   getDocs("botiquin").then(docs => {
     res.json(docs);
   });
@@ -53,8 +53,9 @@ router.post("/crear", isAuthenticateGerente, async (req, res) => {
   });
 });
 
-router.get("/asignacionPorMes", isAuthenticateGerente, (req, res) => {
-  getDocs("botiquin").then(docs => {
+router.get("/asignacionPorMes", isAuthenticateGerente, async (req, res) => {
+  const gerente = await req.user;
+  getBotiquinesByGerente(gerente[0]._id).then(docs => {
     res.render("asignacionPorMes.ejs", { botiquines: docs });
   });
 });
@@ -85,7 +86,7 @@ async function isAuthenticateGerente(req, res, next) {
 
   if (user) {
     const gerente = await getGerenteByEmail(user[0].email);
-    console.log(gerente);
+   // console.log(gerente);
     if (req.isAuthenticated() && gerente.length >= 1) return next();
     else {
       req.flash("signinMessage", "Credenciales no validas"),

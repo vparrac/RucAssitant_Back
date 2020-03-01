@@ -297,6 +297,10 @@ margin-left: 4px;
     display: flex;
     align-items: center;
   }
+
+  .center {
+    text-align: center;
+  }
   
   .sidebar-wrapper .sidebar-brand > a {
     text-transform: uppercase;

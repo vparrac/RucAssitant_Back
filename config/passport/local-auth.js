@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt-nodejs");
 
 passport.serializeUser((user, done) => {
   //console.log("s");
-  console.log(user[0]._id);
+  //console.log(user[0]._id);
   done(null, { id: user[0]._id });
 });
 
@@ -85,7 +85,7 @@ passport.use(
         );
         
       } else if (!bcrypt.hashSync(password) == userdb.password) {
-        console.log("contraseña incorrecta");
+        //console.log("contraseña incorrecta");
         return done(
           null,
           false,
