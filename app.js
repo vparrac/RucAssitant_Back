@@ -12,8 +12,8 @@ const botiquinRouter = require("./routes/botiquin.js");
 const revisionRouter = require("./routes/revision");
 const bodyParser = require("body-parser");
 const authenticationRouter = require("./routes/authentication");
-
-
+const empleadoRouter = require("./routes/empleado");
+const gerenteRouter = require("./routes/gerente");
 
 const { init } = require("./db");
 
@@ -31,7 +31,9 @@ app.use(
 app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
-app.use("/authentication",authenticationRouter);
+app.use("/authentication", authenticationRouter);
+app.use("/  ", empleadoRouter);
+app.use("/gerente", gerenteRouter);
 
 init().then(() => {
   app.listen(port, function() {});
