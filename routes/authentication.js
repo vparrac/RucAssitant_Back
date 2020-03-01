@@ -80,6 +80,7 @@ router.get("/profile", isAuthenticateGerente, (req, res) => {
 
 async function isAuthenticateGerente(req, res, next) {
   const user = await req.user;
+  
   const gerente = await getDocById(user[0].id,"gerentes");  
   if (req.isAuthenticated()&&gerente.length>=1) return next();
   req.flash("signinMessage", "Credenciales no validas"),
