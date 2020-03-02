@@ -30,7 +30,7 @@ router.put("/empleado/:id", (req, res) => {
 
 router.post("/borrar/", isAuthenticateGerente,async (req, res) => {
   const object = await req.body;
-  console.log(object._id);
+  
   deleteEmpleado({ _id: ObjectId(object._id) });
   res.redirect("/empleado/gerente/empleados");
 });
@@ -65,7 +65,7 @@ async function isAuthenticateGerente(req, res, next) {
 
   if (user) {
     const gerente = await getGerenteByEmail(user[0].email);
-    // console.log(gerente);
+    
     if (req.isAuthenticated() && gerente.length >= 1) return next();
     else {
       req.flash("signinMessage", "Credenciales no validas"),

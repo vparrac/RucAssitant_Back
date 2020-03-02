@@ -26,10 +26,11 @@ router.post("/crearRevision", async (req, res) => {
 //router.get("/listarRevisiones", (req,res)=>{} )
 
 router.post("/listRevisiones", async (req,res)=>{  
-  const idUsuario = await req.user;  
-  console.log(idUsuario);
+  const idUsuario = await req.user; 
+  
+  
   const revisiones = await getRevisionesByGerente(idUsuario._id);
-  console.log(revisiones);
+  
   res.render("listaRevisiones",{ revisiones:revisiones });
 });
 
@@ -37,7 +38,7 @@ router.post("/listRevisiones", async (req,res)=>{
  
 router.post("/realizarRevision", async (req, res) => {
   const recibirRevisionId = await req.body;
-  console.log(recibirRevisionId);
+  
   res.render("revisionBotiquin", { id: recibirRevisionId._id });
 });
 
@@ -47,7 +48,7 @@ router.post("/terminarRevision", async (req, res) => {
   const revisionOriginal = await getDocById(object.idRevision,"revision");
   const no={
     calidadManual:object.calidadManual,
-    comentario:object.cantidadGasas,
+    comentario:object.comentario,
     timestamp: Date.now(),
     mes:revisionOriginal[0].mes,
     nombreBotiquin: revisionOriginal[0].nombreBotiquin,

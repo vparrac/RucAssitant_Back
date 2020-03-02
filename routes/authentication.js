@@ -55,7 +55,7 @@ router.post("/crearEmpleado", async (req, res) => {
     });
     insertOneDoc({ email:nuevoUsuario.correo, passowrd:passwordss, role:"empleado" }, "login");
     res.redirect("/empleado/gerente/empleados");
-    console.log(gerente[0]._id);
+    
     
   }
 });
@@ -106,7 +106,7 @@ async function isAuthenticateGerente(req, res, next) {
 
   if (user) {
     const gerente = await getGerenteByEmail(user[0].email);
-    //console.log(gerente);
+    
     if (req.isAuthenticated() && gerente.length >= 1) return next();
     else {
       req.flash("signinMessage", "Credenciales no validas"),

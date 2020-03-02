@@ -45,11 +45,10 @@ const getDocById = (id, dbCollection) => {
     .toArray();
 };
 
-const getRevisionesByGerente = (idGerente) => {
+const getRevisionesByGerente = () => {
   const collection = db.collection("revision");
   return collection
-    .find({
-
+    .find({      
       estado: "completado"
     })
     .toArray();

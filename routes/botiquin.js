@@ -75,9 +75,9 @@ router.put("/editar/:id", isAuthenticateGerente, (req, res) => {
 
 router.get("/revisionesPendientes", isAuthenticateEmpleado, async (req, res) => {
   const user = await req.user;
-  console.log(user[0].email);
+  
   const empleado = await getEmpleadoByEmail(user[0].email);
-  console.log(empleado);
+  
   const revisiones = await  findRevisionesByEmpleado(empleado[0]._id);
   
   res.render("revisionesPendientes",{revisiones:revisiones});
@@ -108,7 +108,7 @@ async function isAuthenticateEmpleado(req, res, next) {
 
   if (user) {
     const empleado = await getEmpleadoByEmail(user[0].email);
-    console.log(empleado);
+    
     if (req.isAuthenticated() && empleado.length >= 1) return next();
     else {
       req.flash("signinMessage", "Credenciales no validas"),
