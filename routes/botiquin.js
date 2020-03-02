@@ -10,7 +10,7 @@ const router = express.Router();
  * Métodos para la consulta de la base de datos
  */
 const { getGerenteByEmail, getEmpleadoByEmail, 
-  getBotiquinesByGerente, getEmpleadoOfGerente, findRevisionesByEmpleado } = require("../db");
+  getBotiquinesByGerente, getEmpleadoOfGerente, findRevisionesByEmpleado,getBotiquinesGerente } = require("../db");
 const {
   getDocs,
   insertOneDoc,
@@ -19,11 +19,12 @@ const {
   
 } = require("../db");
 
-router.get("/", isAuthenticateGerente, (req, res) => {
-  getDocs("botiquin").then(docs => {
+router.get("/", isAuthenticateGerente, async (req, res) => {
+  const user = await req.user;  
+  getBotiquinesGerente(user[0]._id).then(docs => {
     res.render("getBotiquin.ejs", { botiquines: docs });
   });
-});
+}); 
 
 
 router.get("/dibujarBotiquin", isAuthenticateGerente, (req, res) => {
