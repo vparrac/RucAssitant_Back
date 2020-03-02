@@ -1,6 +1,13 @@
 let express = require("express");
 let router = express.Router();
-const { getDocs, insertOneDoc, getDocById, updateDoc, pushEmpleado } = require("../db");
+const { ObjectId } = require("mongodb");
+const { getEmpleadoOfGerente, deleteEmpleado } = require("../db");
+
+const {
+  getDocs,  
+  getDocById,
+  updateDoc,
+} = require("../db");
 
 router.get("/", (req, res) => {
   getDocs("empleados").then(docs => {
@@ -21,16 +28,35 @@ router.put("/empleado/:id", (req, res) => {
   });
 });
 
-router.post("/gerente/:idGerente", (req, res) => {
-  const gerenteId = req.params.idGerente;
-  const object = req.body;
-  insertOneDoc(object, "empleados").then(response => {
-    if (response.insertedCount == 1) {
-      pushEmpleado(gerenteId, response.ops[0]._id).then(doc => {
-        res.send(doc);
-      });
-    }
-  });
+router.post("/borrar/", async (req, res) => {
+  const object = await req.body;
+  console.log(object._id);
+  deleteEmpleado({ _id: ObjectId(object._id) });
+  res.redirect("/empleado/gerente/empleados");
+});
+
+//router.post("/gerente/:idGerente", async (req, res) => {
+//  const gerenteId = await req.params.idGerente;
+//  const object = req.body;
+//  insertOneDoc(object, "empleados").then(response => {
+//    if (response.insertedCount == 1) {
+//      pushEmpleado(gerenteId, response.ops[0]._id).then(doc => {
+//        res.send(doc);
+//      });
+//    }
+//  });
+//});
+
+
+router.get("/gerente/crearEmpleado", async (req, res) => {
+  res.render("creacionEmpleados");
+});
+
+
+router.get("/gerente/empleados", async (req, res) => {
+  const gerente = await req.user;
+  const empleados = await getEmpleadoOfGerente(gerente[0]._id);
+  res.render("empleados", { empleados: empleados });
 });
 
 module.exports = router;

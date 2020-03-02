@@ -62,7 +62,7 @@
                 <a class="nav-link" href="/authentication/signin">Ingresa<span class="sr-only"></span></a>
             </li>
             <% } %>
-            <% if (user && !nombreEmpresa) { %> 
+            <% if (user && gerente)  { %> 
             
             <li class="nav-item">
                 <a class="nav-link" href="/authentication/logout">Salir<span class="sr-only"></span></a>
@@ -76,6 +76,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="/botiquin/asignacionPorMes">Asignación botiquin por mes</a>
             </li>
+         
+            <li class="nav-item">
+                <a class="nav-link" href="/empleado/gerente/empleados">Ver mis empleados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/empleado/gerente/crearEmpleado">Creación Empleados</a>
+            </li>
+            <% } %>
+
+            <% if (user&&!gerente){ %> 
+            
+                <li class="nav-item">
+                    <a class="nav-link" href="/authentication/logout">Salir<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/botiquin/revisionesPendientes"> Revisión pendiente<span class="sr-only"></span></a>
+                </li>
+                
             <% } %>
          
         </ul>
@@ -106,4 +124,12 @@ integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ
 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
 <script src="../javascripts/asignacionPorMes.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="./authentication.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="./authentication.js"></script>
 </body>

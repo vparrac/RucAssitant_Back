@@ -1,7 +1,7 @@
 <%- layout('profiles') %>
 
         <!--TODO: Agregar acción para registrar asignación-->
-        <form id="botiquinFormA" class="center" action="" method="post">
+        <form id="botiquinFormA" class="center" action="/revision/crearRevision" method="post">
             <br>
             <h3>Asigne un empleado al botiquin</h3>
             <div class="form-group">
@@ -29,11 +29,21 @@
                 </label>
                 <select name="botiquin" class="form-control">
                     <% botiquines.forEach(botiquin => { %>
-                        <option value="<%= botiquin.nombre %>"><%= botiquin.nombre %> </option>
+                        <option value="<%= botiquin._id %>"><%= botiquin.nombre %> </option>
                     <% }); %> 
                 </select>
             </div>
 
+            <div class="form-group">
+                <label id="empleado">
+                    <span>Empleado:</span>                    
+                </label>
+                <select name="empleado" class="form-control">
+                    <% empleados.forEach(empleado => { %>
+                        <option value="<%= empleado._id %>"><%= empleado.nombre %> </option>
+                    <% }); %> 
+                </select>
+            </div>
             
             <!--TODO: AGREGAR EMPLEADO (NOMBRE)-->
             <div class="form-group">

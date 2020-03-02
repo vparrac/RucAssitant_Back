@@ -1,0 +1,25 @@
+<%- layout('profiles') %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Mes</th>
+      <th scope="col">Nombre Botiquin</th> 
+      <th scope="col">Estado</th>
+      <th scope="col">Realizar revisión</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <% revisiones.forEach(revision => { %>
+      <tr>
+          <td> <%= revision.mes %> </td>
+          <td> <%= revision.nombreBotiquin %> </td>
+          <td> <%= revision.estado %> </td>
+          <td> 
+         <form action="/" method="post">
+              <input name="_id" hidden>
+            <button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i></button>
+          </form></td>
+        </tr>
+      <% }); %>
+  </tbody>
+</table>

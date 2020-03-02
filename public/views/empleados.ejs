@@ -1,0 +1,23 @@
+<%- layout('profiles') %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th> 
+      <th scope="col">Acciones</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <% empleados.forEach(empleado => { %>
+      <tr>
+          <td> <%= empleado.nombre %> </td>
+          <td> <%= empleado.correo %> </td>
+          <td> 
+            <form action="/empleado/borrar" method="post">
+              <input name="_id" value="<%= empleado._id %>" hidden>
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+          </form></td>
+        </tr>
+      <% }); %>
+  </tbody>
+</table>

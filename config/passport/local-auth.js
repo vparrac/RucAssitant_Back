@@ -1,6 +1,13 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { insertOneDoc, getDocById, getLoginByName, getLoginByEmail } = require("../../db");
+
+const {
+  insertOneDoc,
+  getDocById,
+  getLoginByName,
+  getLoginByEmail,
+  
+} = require("../../db");
 const bcrypt = require("bcrypt-nodejs");
 
 passport.serializeUser((user, done) => {
@@ -14,6 +21,7 @@ passport.deserializeUser((user, done) => {
   //console.log(user);
   done(null, getDocById(user.id, "login"));
 });
+
 
 passport.use(
   "local-signup",
@@ -41,9 +49,9 @@ passport.use(
           { email, nombreEmpresa, contacto },
           "gerentes",
         );
-          
+
         if (gerente) {
-          const user = await insertOneDoc({ email, passwordss }, "login");          
+          const user = await insertOneDoc({ email, passwordss, role:"gerente" }, "login");
           done(null, [
             {
               email: user.ops[0].email,
@@ -51,8 +59,7 @@ passport.use(
               _id: user.ops[0]._id,
             },
           ]);
-        }
-        else{
+        } else {
           return done(
             null,
             false,
@@ -74,7 +81,7 @@ passport.use(
     },
     async (req, email, password, done) => {
       const userdb = await getLoginByName(email);
-      console.log(userdb);
+      //console.log(userdb);
       if (userdb.length < 1) {
         //console.log("email no encontrado");
         //console.log(req);
@@ -83,7 +90,6 @@ passport.use(
           false,
           req.flash("signinMessage", "Usuario no encontrado "),
         );
-        
       } else if (!bcrypt.hashSync(password) == userdb.password) {
         //console.log("contraseña incorrecta");
         return done(
@@ -96,7 +102,6 @@ passport.use(
     },
   ),
 );
-
 
 passport.use(
   "empleado-signup",
@@ -126,7 +131,7 @@ passport.use(
           "gerentes",
         );
 
-        if (empleado.length>=1) {
+        if (empleado.length >= 1) {
           const user = await insertOneDoc({ email, passwordss }, "login");
           done(null, [
             {
@@ -135,8 +140,7 @@ passport.use(
               _id: user.ops[0]._id,
             },
           ]);
-        }
-        else{
+        } else {
           return done(
             null,
             false,
