@@ -79,7 +79,7 @@ app.use(express.urlencoded({ extended: false }));
  */
 app.use(
   session({
-    secret: "rucBackSession",
+    secret: process.env.secretSession,
     resave: false,
     saveUninitialized: false,
   }),

@@ -61,6 +61,9 @@
                 <a class="nav-link" href="/botiquin">Ver botiquines<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/botiquin/getExt">Ver usos extraordinarios<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/botiquin/asignacionPorMes">Asignación botiquin por mes</a>
             </li>
          
@@ -70,6 +73,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/empleado/gerente/crearEmpleado">Creación Empleados</a>
             </li>
+            
             <% } %>
 
             <% if (user&&!gerente){ %> 
@@ -79,6 +83,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/botiquin/revisionesPendientes"> Revisión pendiente<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/botiquin/botiquinesExt"> Registrar uso extraordinario<span class="sr-only"></span></a>
                 </li>
                 
             <% } %>
