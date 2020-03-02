@@ -9,12 +9,9 @@ const router = express.Router();
 /**
  * Métodos para la consulta de la base de datos
  */
+const { getGerenteByEmail, getEmpleadoByEmail, 
+  getBotiquinesByGerente, getEmpleadoOfGerente, findRevisionesByEmpleado,getBotiquinesGerente } = require("../db");
 const {
-  getGerenteByEmail,
-  getEmpleadoByEmail,
-  getBotiquinesByGerente,
-  getEmpleadoOfGerente,
-  findRevisionesByEmpleado,
   pushRegistroExt,
   updateElementosBotiquin,
   getRegistrosByBotiquinYGerente
@@ -23,11 +20,11 @@ const { insertOneDoc, getDocById, updateDoc } = require("../db");
 const moment = require("moment");
 
 router.get("/", isAuthenticateGerente, async (req, res) => {
-  const gerente = await req.user;
-  getBotiquinesByGerente(gerente[0]._id).then(docs => {
+  const user = await req.user;  
+  getBotiquinesGerente(user[0]._id).then(docs => {
     res.render("getBotiquin.ejs", { botiquines: docs });
   });
-});
+}); 
 
 router.get("/getExt", isAuthenticateGerente, async (req, res) => {
   const gerente = await req.user;

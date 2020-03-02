@@ -42,11 +42,8 @@ router.post("/crearRevision", async (req, res) => {
  * Muestra las revisiones realizads para un gerente
  */
 router.post("/listRevisiones", async (req,res)=>{  
-  const idUsuario = await req.user; 
-  
-  
-  const revisiones = await getRevisionesByGerente(idUsuario._id);
-  
+  const idUsuario = await req.body;     
+  const revisiones = await getRevisionesByGerente(idUsuario.idBotiquin);  
   res.render("listaRevisiones",{ revisiones:revisiones });
 });
 
@@ -77,7 +74,7 @@ router.post("/terminarRevision", async (req, res) => {
     nombreBotiquin: revisionOriginal[0].nombreBotiquin,
     estado:"completado",
     empleado: revisionOriginal[0].idUsuario,
-    botiquin: revisionOriginal[0].botiquin,
+    botiquin: ObjectId(revisionOriginal[0].botiquin),
     idGerente: revisionOriginal[0].idGerente,
     cantidadGasas:object.cantidadGasas,
     estadoGasas:object.estadoGasas,
