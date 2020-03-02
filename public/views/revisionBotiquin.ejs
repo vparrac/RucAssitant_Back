@@ -1,16 +1,235 @@
 <%- layout('profiles') %>
+    <br>
+    <br>
+    <h1> Revisión botiquin </h1>
+    <hr>
+    <form action="/botiquin/revision" method="POST">     
+       
+      
+      <div class="form-group">
+        <h4>Gasas</h4>
+        <label for="cantidadGasas">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="cantidadGasas" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="estadoGasas" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>
+      
+      </div>
+      <hr>
 
-    <h1> Creación de un botiquín reglamentario</h1>
+      <div class="form-group">
+        <h4>Esparadrapo 4 metros</h4>
+        <label for="esparadrapoCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="esparadrapoCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="estadoEsparadrapo" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      <div class="form-group">
+        <h4>Baja Lenguas</h4>
+        <label for="bajaLenguasCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="bajaLenguasCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="estadoBajaLenguas" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      <div class="form-group">
+        <h4>Guantes de latex</h4>
+        <label for="guantesLatexCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="guantesLatexCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="estadoGuantesLatex" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      
+      <div class="form-group">
+        <h4>Venda elástica 2 x 5 yardas</h4>
+        <label for="venda2x5Cantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="venda2x5Cantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="venda2x5Calidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      <div class="form-group">
+        <h4>Venda elástica 3 x 5 yardas</h4>
+        <label for="venda3x5Cantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="venda3x5Cantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="venda3x5Calidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+
+      <div class="form-group">
+        <h4>Venda elástica 5 x 5 yardas</h4>
+        <label for="venda5x5Cantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="venda5x5Cantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="venda5x5Calidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
     
-    <form class="form-inline">
-        <div class="form-group mb-2">
-          <label for="staticEmail2" class="sr-only">Email</label>
-          <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="inputPassword2" class="sr-only">Password</label>
-          <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-      </form>
-  
+
+      <div class="form-group">
+        <h4>Venda elástica 3 x 5 yardas</h4>
+        <label for="venda3x5Cantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="venda3x5Cantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="venda3x5Calidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      <div class="form-group">
+        <h4>Yodopovidona 120 ml (Jabón quirúrgico):</h4>
+        <label for="yodopovidonaCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="yodopovidonaCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="yodopovidonaCalidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+      <div class="form-group">
+        <h4>Solución salina 250 cc o 500 cc:</h4>
+        <label for="sslCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="sslCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="sslCalidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+
+
+      
+      <div class="form-group">
+        <h4>Termómetro de mercurio o digital:</h4>
+        <label for="termometroCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="termometroCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="termometroCalidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+      
+   
+      <div class="form-group">
+        <h4>Alcohol:</h4>
+        <label for="alcoholCantidad">
+          <span>Cantidad:</span>          
+        </label>
+        <input class="form-control" type="number" name="alcoholCantidad" >
+        <br>
+        <label id="gasasEstado">
+          <span>Estado:</span>          
+        </label>
+        <select name="alcoholCalidad" class="form-control">          
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>          
+      </select>      
+      </div>
+      <hr>
+      
+      <div class="form-group">
+      <button type="submit" class="btn btn-dark">Terminar revisión</button>
+    </div>
+    </form> 

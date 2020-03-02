@@ -21,6 +21,9 @@ router.post("/crearRevision", async (req, res) => {
 
 //router.get("/listarRevisiones", (req,res)=>{} )
 
+router.post("/realizarRevision", (req,res)=>{
+  res.render("revisionBotiquin");
+});
 
 
 router.post("/:idBotiquin", (req, res) => {
