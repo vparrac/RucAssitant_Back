@@ -1,0 +1,40 @@
+<%- layout('profiles') %>
+
+<h1>Ver usos extraordinarios</h1>
+
+<div class="container">
+    <select name="botiquin" id="botiquin" class="form-control">
+        <option value="">Selecciona un botiquin</option>
+        <% botiquines.forEach(botiquin => { %>
+        <option value="<%= botiquin._id %>"><%= botiquin.nombre %> </option>
+        <% }); %>
+    </select>
+
+    <table class="table table-striped table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th> Gasas </th>
+                <th> Esparadrapo 4 metros </th>
+                <th> Baja lenguas </th>
+                <th> Guantes de latex </th>
+                <th> Venda elástica 2 x 5 yardas </th>
+                <th> Venda elástica 3 x 5 yardas </th>
+                <th> Venda elástica 5 x 5 yardas </th>
+                <th> Venda algodón 3 x 5 yardas </th>
+                <th> yodopovidona 120 ml </th>
+                <th> Solución salina 150 cc </th>
+                <th> Termometro </th>
+                <th> Alcohol </th>
+            </tr>
+            <tr>
+
+            </tr>
+        </thead>
+
+        <tbody id="botiquinData">
+        </tbody>
+    </table>
+</div>
+
+
+<script src="../javascripts/verRegistros.js"></script>

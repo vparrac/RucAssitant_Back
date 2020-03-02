@@ -90,18 +90,18 @@ const reabastecer = botiquinId => {
 const reabastecerBotiquin = botiquin => {
   const reabastecido = {
     nombre: botiquin[0].nombre,
-    gasas: "20",
-    esparadrapo4Metros: "1",
-    bajaLenguas: "20",
-    guantesLatex: "100",
-    vendaEl2x5: "1",
-    vendaEl3x5: "1",
-    vendaEl5x5: "1",
-    vendaAl3x5: "2",
-    yodopovidona120: "1",
-    solucionSal: "2",
-    termometro: "1",
-    alcohol: "1",
+    gasas: 20,
+    esparadrapo4Metros: 1,
+    bajaLenguas: 20,
+    guantesLatex: 100,
+    vendaEl2x5: 1,
+    vendaEl3x5: 1,
+    vendaEl5x5: 1,
+    vendaAl3x5: 2,
+    yodopovidona120: 1,
+    solucionSal: 2,
+    termometro: 1,
+    alcohol: 1
   };
   fetch("/botiquin/editar/" + botiquin[0]._id, {
     method: "PUT",
@@ -154,9 +154,8 @@ const drawData = data => {
       "</td> <td>" +
       botiquin.alcohol +
       "</td> <td class='table-inline'>" +
-      "<button id='detalle' class='btn btn-primary' onclick='mostrarDetalle(" + botiquin._id + ")'><i class='fa fa-search'></i></button>" + 
+      "<form action='/revision/listRevisiones' method='POST'> <button id='detalle' type='submit' class='btn btn-primary'><i class='fa fa-search'></i></button></form>" +
       "<button id='reabastecer' class='btn btn-primary' onclick='reabastecer(" + botiquin._id + ")'><i class='fa fa-refresh'></i></button>" +
       "</td> </tr>";
   });
-  console.log(tableBody);
 };

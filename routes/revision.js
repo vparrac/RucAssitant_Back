@@ -50,6 +50,9 @@ router.post("/listRevisiones", async (req,res)=>{
   res.render("listaRevisiones",{ revisiones:revisiones });
 });
 
+
+
+
 /**
  * Método que retorna el tamplate para realizar revisión
  */

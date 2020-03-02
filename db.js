@@ -30,8 +30,7 @@ const getDocs = dbCollection => {
   return collection.find({}).toArray();
 };
 
-
-const deleteEmpleado = objeto =>{
+const deleteEmpleado = objeto => {
   //console.log(objeto);
   const collection = db.collection("empleados");
   return collection.remove(objeto);
@@ -48,26 +47,26 @@ const getDocById = (id, dbCollection) => {
 const getRevisionesByGerente = () => {
   const collection = db.collection("revision");
   return collection
-    .find({      
-      estado: "completado"
+    .find({
+      estado: "completado",
     })
     .toArray();
 };
 
-
-
-
-
-const getBotiquinesByGerente = (idGerente)=>{
-  const collection= db.collection("botiquin");
-  return collection.find({idgerente: ObjectId(idGerente)}).toArray();
+const getBotiquinesByGerente = idGerente => {
+  const collection = db.collection("botiquin");
+  return collection.find({ idgerente: ObjectId(idGerente) }).toArray();
 };
 
-const insertEmpleadoOfGerente = (object)=>{
-  const collection= db.collection("empleados");
+const getRegistrosByBotiquinYGerente = (idBotiquin, idGerente) => {
+  const collection = db.collection("registroExt");
+  return collection.find({ idbotiquin: ObjectId(idBotiquin), idgerente: ObjectId(idGerente) }).toArray();
+};
+
+const insertEmpleadoOfGerente = object => {
+  const collection = db.collection("empleados");
   return collection.insertOne(object);
 };
-
 
 const updateDoc = (id, object, dbCollection) => {
   const collection = db.collection(dbCollection);
@@ -121,54 +120,98 @@ const pushRevision = (id, revisionId) => {
   );
 };
 
-const getLoginByName = (login) => {
+const updateElementosBotiquin = (
+  id,
+  gasas,
+  esparadrapo4Metros,
+  bajaLenguas,
+  guantesLatex,
+  vendaEl2x5,
+  vendaEl3x5,
+  vendaEl5x5,
+  vendaAl3x5,
+  yodopovidona120,
+  solucionSal,
+  termometro,
+  alcohol,
+) => {
+  return db.collection("botiquin").updateOne(
+    { _id: id },
+    {
+      $set: {
+        gasas,
+        esparadrapo4Metros,
+        bajaLenguas,
+        guantesLatex,
+        vendaEl2x5,
+        vendaEl3x5,
+        vendaEl5x5,
+        vendaAl3x5,
+        yodopovidona120,
+        solucionSal,
+        termometro,
+        alcohol
+      },
+    },
+  );
+};
+
+const pushRegistroExt = (id, registroId) => {
+  const collection = db.collection("botiquin");
+  return collection.updateOne(
+    { _id: ObjectId(id) },
+    { $push: { registro_id: registroId } },
+    { upsert: true },
+  );
+};
+
+const getLoginByName = login => {
   const collection = db.collection("login");
   return collection
     .find({
-      email: login
+      email: login,
     })
     .toArray();
 };
 
-const getLoginByEmail = (login) => {
+const getLoginByEmail = login => {
   const collection = db.collection("empleados");
   return collection
     .find({
-      email: login
+      email: login,
     })
     .toArray();
 };
 
-
-const getEmpleadoOfGerente=(idGerente)=>{
+const getEmpleadoOfGerente = idGerente => {
   const collection = db.collection("empleados");
   return collection
     .find({
-      idgerente: ObjectId(idGerente)
+      idgerente: ObjectId(idGerente),
     })
     .toArray();
-
 };
-const getGerenteByEmail = (login) => {
+const getGerenteByEmail = login => {
   const collection = db.collection("gerentes");
   return collection
     .find({
-      email: login
+      email: login,
     })
     .toArray();
 };
 
-
-const findRevisionesByEmpleado= (empleado) =>{
-  const collection = db.collection("revision");  
-  return collection.find({estado:"pendiente",idUsuario: ObjectId(empleado)}).toArray();
+const findRevisionesByEmpleado = empleado => {
+  const collection = db.collection("revision");
+  return collection
+    .find({ estado: "pendiente", idUsuario: ObjectId(empleado) })
+    .toArray();
 };
 
-const getEmpleadoByEmail = (login) => {
+const getEmpleadoByEmail = login => {
   const collection = db.collection("empleados");
   return collection
     .find({
-      correo: login
+      correo: login,
     })
     .toArray();
 };
@@ -200,5 +243,8 @@ module.exports = {
   getEmpleadoOfGerente,
   deleteEmpleado,
   findRevisionesByEmpleado,
-  getRevisionesByGerente
+  getRevisionesByGerente,
+  pushRegistroExt,
+  updateElementosBotiquin,
+  getRegistrosByBotiquinYGerente
 };
