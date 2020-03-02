@@ -3,30 +3,11 @@ let router = express.Router();
 const { ObjectId } = require("mongodb");
 const { getEmpleadoOfGerente, deleteEmpleado, getGerenteByEmail } = require("../db");
 
-const {
-  getDocs,  
-  getDocById,
-  updateDoc,
-} = require("../db");
 
-router.get("/", (req, res) => {
-  getDocs("empleados").then(docs => {
-    res.send(docs);
-  });
-});
 
-router.get("/empleado/:id", (req, res) => {
-  getDocById(req.params.id, "empleados").then(doc => {
-    res.send(doc);
-  });
-});
-
-router.put("/empleado/:id", (req, res) => {
-  const object = req.body;
-  updateDoc(req.params.id, object, "empleados").then(response => {
-    res.send(response);
-  });
-});
+/**
+ * Método para borrar un empleado. Es necesario ser un gerente
+ */
 
 router.post("/borrar/", isAuthenticateGerente,async (req, res) => {
   const object = await req.body;
@@ -35,23 +16,16 @@ router.post("/borrar/", isAuthenticateGerente,async (req, res) => {
   res.redirect("/empleado/gerente/empleados");
 });
 
-//router.post("/gerente/:idGerente", async (req, res) => {
-//  const gerenteId = await req.params.idGerente;
-//  const object = req.body;
-//  insertOneDoc(object, "empleados").then(response => {
-//    if (response.insertedCount == 1) {
-//      pushEmpleado(gerenteId, response.ops[0]._id).then(doc => {
-//        res.send(doc);
-//      });
-//    }
-//  });
-//});
-
-
+/**
+ * Crea un empleado y lo asocia a un empleado
+ */
 router.get("/gerente/crearEmpleado", isAuthenticateGerente, async (req, res) => {
   res.render("creacionEmpleados");
 });
 
+/**
+ * Retorna los empleados de un gerente
+ */
 
 router.get("/gerente/empleados", isAuthenticateGerente, async (req, res) => {
   const gerente = await req.user;
@@ -59,6 +33,12 @@ router.get("/gerente/empleados", isAuthenticateGerente, async (req, res) => {
   res.render("empleados", { empleados: empleados });
 });
 
+/**
+ * Métpdp que permite validar si un gerente está autenticado
+ * @param {*} req  El request del usuario
+ * @param {*} res Para enviar respuesa al usuario
+ * @param {*} next Para que el programa siga su curso
+ */
 
 async function isAuthenticateGerente(req, res, next) {
   const user = await req.user;

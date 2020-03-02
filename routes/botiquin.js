@@ -1,5 +1,14 @@
+/**
+ * Dependencia a express
+ */
 const express = require("express");
+/**
+ * Método para manejar REST
+ */
 const router = express.Router();
+/**
+ * Métodos para la consulta de la base de datos
+ */
 const { getGerenteByEmail, getEmpleadoByEmail, 
   getBotiquinesByGerente, getEmpleadoOfGerente, findRevisionesByEmpleado } = require("../db");
 const {
@@ -50,6 +59,10 @@ router.post("/crear", isAuthenticateGerente, async (req, res) => {
   });
 });
 
+
+/**
+ * Método que crea una revisión a partir de la asignación de un jefe
+ */
 router.get("/asignacionPorMes", isAuthenticateGerente, async (req, res) => {
   const gerente = await req.user;
   getBotiquinesByGerente(gerente[0]._id).then(docs => {
@@ -71,7 +84,9 @@ router.put("/editar/:id", isAuthenticateGerente, (req, res) => {
 });
 
 
-//router.post("/realizarRevision")
+/**
+ * Método que muestras la revisiones pendientes de un usuario
+ */
 
 router.get("/revisionesPendientes", isAuthenticateEmpleado, async (req, res) => {
   const user = await req.user;
@@ -83,6 +98,13 @@ router.get("/revisionesPendientes", isAuthenticateEmpleado, async (req, res) => 
   res.render("revisionesPendientes",{revisiones:revisiones});
 });
 
+
+/**
+ * Métpdp que permite validar si un gerente está autenticado
+ * @param {*} req  El request del usuario
+ * @param {*} res Para enviar respuesa al usuario
+ * @param {*} next Para que el programa siga su curso
+ */
 async function isAuthenticateGerente(req, res, next) {
   const user = await req.user;
 

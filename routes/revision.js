@@ -1,8 +1,21 @@
+/**
+ * Dependenca a Express
+ */
 const express = require("express");
+/**
+ * Router para manejar REST
+ */
 const router = express.Router();
+/**
+ * Métodos para hacer consultas a la base de datos
+ */
 const { insertOneDoc, pushRevision, getDocById, updateDoc, getRevisionesByGerente } = require("../db");
 const { ObjectId } = require("mongodb");
 
+/**
+ * Métpdp para creear una rvisión y asociarla a un botiquín
+ * y a un usuario 
+ */
 router.post("/crearRevision", async (req, res) => {
   //console.log(req.body);
   const user = await req.user;
@@ -25,6 +38,9 @@ router.post("/crearRevision", async (req, res) => {
 
 //router.get("/listarRevisiones", (req,res)=>{} )
 
+/**
+ * Muestra las revisiones realizads para un gerente
+ */
 router.post("/listRevisiones", async (req,res)=>{  
   const idUsuario = await req.user; 
   
@@ -34,7 +50,9 @@ router.post("/listRevisiones", async (req,res)=>{
   res.render("listaRevisiones",{ revisiones:revisiones });
 });
 
-
+/**
+ * Método que retorna el tamplate para realizar revisión
+ */
  
 router.post("/realizarRevision", async (req, res) => {
   const recibirRevisionId = await req.body;
@@ -42,7 +60,9 @@ router.post("/realizarRevision", async (req, res) => {
   res.render("revisionBotiquin", { id: recibirRevisionId._id });
 });
 
-
+/**
+ * Método que persiste los datos de la revisión
+ */
 router.post("/terminarRevision", async (req, res) => {
   const object = await req.body;
   const revisionOriginal = await getDocById(object.idRevision,"revision");

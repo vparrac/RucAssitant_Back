@@ -50,7 +50,7 @@ const path = require("path");
  * Dependencia al archivo que hace todo el manejo de la base de datos
  */
 const empleadoRouter = require("./routes/empleado");
-const gerenteRouter = require("./routes/gerente");
+
 
 const { init } = require("./db");
 
@@ -152,7 +152,7 @@ app.use("/botiquin", botiquinRouter);
 app.use("/revision", revisionRouter);
 app.use("/authentication", authenticationRouter);
 app.use("/empleado", empleadoRouter);
-app.use("/gerente", gerenteRouter);
+
 
 init().then(() => {
   app.listen(port, function() {});
