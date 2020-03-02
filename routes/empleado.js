@@ -1,36 +1,62 @@
 let express = require("express");
 let router = express.Router();
-const { getDocs, insertOneDoc, getDocById, updateDoc, pushEmpleado } = require("../db");
+const { ObjectId } = require("mongodb");
+const { getEmpleadoOfGerente, deleteEmpleado, getGerenteByEmail } = require("../db");
 
-router.get("/", (req, res) => {
-  getDocs("empleados").then(docs => {
-    res.send(docs);
-  });
+
+
+/**
+ * Método para borrar un empleado. Es necesario ser un gerente
+ */
+
+router.post("/borrar/", isAuthenticateGerente,async (req, res) => {
+  const object = await req.body;
+  
+  deleteEmpleado({ _id: ObjectId(object._id) });
+  res.redirect("/empleado/gerente/empleados");
 });
 
-router.get("/empleado/:id", (req, res) => {
-  getDocById(req.params.id, "empleados").then(doc => {
-    res.send(doc);
-  });
+/**
+ * Crea un empleado y lo asocia a un empleado
+ */
+router.get("/gerente/crearEmpleado", isAuthenticateGerente, async (req, res) => {
+  res.render("creacionEmpleados");
 });
 
-router.put("/empleado/:id", (req, res) => {
-  const object = req.body;
-  updateDoc(req.params.id, object, "empleados").then(response => {
-    res.send(response);
-  });
+/**
+ * Retorna los empleados de un gerente
+ */
+
+router.get("/gerente/empleados", isAuthenticateGerente, async (req, res) => {
+  const gerente = await req.user;
+  const empleados = await getEmpleadoOfGerente(gerente[0]._id);
+  res.render("empleados", { empleados: empleados });
 });
 
-router.post("/gerente/:idGerente", (req, res) => {
-  const gerenteId = req.params.idGerente;
-  const object = req.body;
-  insertOneDoc(object, "empleados").then(response => {
-    if (response.insertedCount == 1) {
-      pushEmpleado(gerenteId, response.ops[0]._id).then(doc => {
-        res.send(doc);
-      });
+/**
+ * Métpdp que permite validar si un gerente está autenticado
+ * @param {*} req  El request del usuario
+ * @param {*} res Para enviar respuesa al usuario
+ * @param {*} next Para que el programa siga su curso
+ */
+
+async function isAuthenticateGerente(req, res, next) {
+  const user = await req.user;
+
+  if (user) {
+    const gerente = await getGerenteByEmail(user[0].email);
+    
+    if (req.isAuthenticated() && gerente.length >= 1) return next();
+    else {
+      req.flash("signinMessage", "Credenciales no validas"),
+      res.redirect("/authentication/signin");
+      return;
     }
-  });
-});
+  } else {
+    req.flash("signinMessage", "Credenciales no validas"),
+    res.redirect("/authentication/signin");
+    return;
+  }
+}
 
 module.exports = router;

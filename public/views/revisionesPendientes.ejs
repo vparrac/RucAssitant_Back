@@ -1,0 +1,33 @@
+<%- layout('profiles') %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Mes</th>
+      <th scope="col">Nombre Botiquin</th> 
+      <th scope="col">Estado</th>
+      <th scope="col">Realizar revisión</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <% revisiones.forEach(revision => { %>
+      <tr>
+          <td> <%= revision.mes %> </td>
+          <td> <%= revision.nombreBotiquin %> </td>
+          <td> <%= revision.estado %> </td>
+          <td> 
+         <form action="/revision/realizarRevision" method="post">
+            <input name="_id" value="<%= revision._id %>" hidden>
+            <button type="submit" class="btn btn-success"><i class="fas fa-check-square"></i></button>
+          </form></td>
+        </tr>
+    <% }); %>   
+  </tbody>
+</table>
+
+<% if (revisiones.length<=0){ %> 
+  <div class="card text-white bg-success">
+    <div class="card-body">
+      No tienes revisiones pendientes :D.
+    </div>
+  </div>      
+<% } %>

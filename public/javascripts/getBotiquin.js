@@ -158,4 +158,5 @@ const drawData = data => {
       "<button id='reabastecer' class='btn btn-primary' onclick='reabastecer(" + botiquin._id + ")'><i class='fa fa-refresh'></i></button>" +
       "</td> </tr>";
   });
+  console.log(tableBody);
 };

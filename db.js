@@ -30,6 +30,12 @@ const getDocs = dbCollection => {
   return collection.find({}).toArray();
 };
 
+
+const deleteEmpleado = objeto =>{
+  //console.log(objeto);
+  const collection = db.collection("empleados");
+  return collection.remove(objeto);
+};
 const getDocById = (id, dbCollection) => {
   const collection = db.collection(dbCollection);
   return collection
@@ -39,11 +45,30 @@ const getDocById = (id, dbCollection) => {
     .toArray();
 };
 
+const getRevisionesByGerente = () => {
+  const collection = db.collection("revision");
+  return collection
+    .find({      
+      estado: "completado"
+    })
+    .toArray();
+};
+
+
+
+
 
 const getBotiquinesByGerente = (idGerente)=>{
   const collection= db.collection("botiquin");
   return collection.find({idgerente: ObjectId(idGerente)}).toArray();
 };
+
+const insertEmpleadoOfGerente = (object)=>{
+  const collection= db.collection("empleados");
+  return collection.insertOne(object);
+};
+
+
 const updateDoc = (id, object, dbCollection) => {
   const collection = db.collection(dbCollection);
   return collection.replaceOne(
@@ -114,11 +139,36 @@ const getLoginByEmail = (login) => {
     .toArray();
 };
 
+
+const getEmpleadoOfGerente=(idGerente)=>{
+  const collection = db.collection("empleados");
+  return collection
+    .find({
+      idgerente: ObjectId(idGerente)
+    })
+    .toArray();
+
+};
 const getGerenteByEmail = (login) => {
   const collection = db.collection("gerentes");
   return collection
     .find({
       email: login
+    })
+    .toArray();
+};
+
+
+const findRevisionesByEmpleado= (empleado) =>{
+  const collection = db.collection("revision");  
+  return collection.find({estado:"pendiente",idUsuario: ObjectId(empleado)}).toArray();
+};
+
+const getEmpleadoByEmail = (login) => {
+  const collection = db.collection("empleados");
+  return collection
+    .find({
+      correo: login
     })
     .toArray();
 };
@@ -144,5 +194,11 @@ module.exports = {
   getLoginByEmail,
   pushEmpleado,
   getGerenteByEmail,
-  getBotiquinesByGerente
+  getEmpleadoByEmail,
+  getBotiquinesByGerente,
+  insertEmpleadoOfGerente,
+  getEmpleadoOfGerente,
+  deleteEmpleado,
+  findRevisionesByEmpleado,
+  getRevisionesByGerente
 };
