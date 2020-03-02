@@ -1,0 +1,68 @@
+<%- layout('profiles') %>
+    <div class="container">
+        <div class="container-fluid">
+            <table class="table table-striped table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th > # </th>
+                        <th > Fecha </th>
+                        <th > Estado general </th>
+                        <th > Estado del manual </th>
+                        <th  > Gasas </th>
+                        <th  > Esparadrapo 4 metros </th>
+                        <th  > Baja lenguas </th>
+                        <th  > Guantes de latex </th>
+                        <th  > Venda elástica 2 x 5 yardas </th>
+                        <th  > Venda elástica 3 x 5 yardas </th>
+                        <th  > Venda elástica 5 x 5 yardas </th>                        
+                        <th  > yodopovidona 120 ml </th>
+                        <th  > Solución salina 150 cc </th>
+                        <th  > Termometro </th>
+                        <th  > Alcohol </th>
+                    </tr>
+                    <tr>
+                       
+                    </tr>
+                </thead>
+                <tbody id="revisionesBody">
+                    <% revisiones.forEach(revision => { %>
+                        <tr>
+                            <td> Calidad </td>
+                            <td> <%= revision.mes %> </td>
+                            <td> <%= revision.comentario %> </td>
+                            <td> <%= revision.calidadManual %> </td>
+                            <td> <%= revision.estadoGasas %> </td>
+                            <td> <%= revision.estadoEsparadrapo %> </td>
+                            <td> <%= revision.estadoBajaLenguas %> </td>
+                            <td> <%= revision.estadoGuantesLatex %> </td>
+                            <td> <%= revision.venda2x5Calidad %> </td>
+                            <td> <%= revision.venda3x5Calidad %> </td>
+                            <td> <%= revision.venda5x5Cantidad %> </td>
+                            <td> <%= revision.yodopovidonaCalidad %> </td>
+                            <td> <%= revision.sslCantidad %> </td>   
+                            <td> <%= revision.sslCantidad %> </td>   
+                            <td> <%= revision.alcoholCalidad %> </td>                            
+                        </tr>
+                        <% }); %>
+                        <% revisiones.forEach(revision => { %>
+                            <tr>
+                                <td> Cantidad </td>
+                                <td> <%= revision.mes %> </td>
+                                <td> <%= revision.comentario %> </td>
+                                <td> <%= revision.calidadManual %> </td>
+                                <td> <%= revision.cantidadGasas %> </td>
+                                <td> <%= revision.esparadrapoCantidad %> </td>
+                                <td> <%= revision.bajaLenguasCantidad %> </td>
+                                <td> <%= revision.guantesLatexCantidad %> </td>
+                                <td> <%= revision.venda2x5Cantidad %> </td>
+                                <td> <%= revision.venda3x5Cantidad %> </td>
+                                <td> <%= revision.venda5x5Cantidad %> </td>
+                                <td> <%= revision.yodopovidonaCantidad %> </td>
+                                <td> <%= revision.sslCantidad %> </td>   
+                                <td> <%= revision.termometroCantidad %> </td>   
+                                <td> <%= revision.alcoholCantidad %> </td>                            
+                            </tr> <% }); %>
+                            
+                </tbody>
+            </table>
+        </div>

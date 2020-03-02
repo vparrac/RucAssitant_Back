@@ -21,3 +21,11 @@
       <% }); %>
   </tbody>
 </table>
+
+<% if (empleados.length<=0){ %> 
+  <div class="card text-white bg-success">
+    <div class="card-body">
+      No tienes empleados registrados
+    </div>
+  </div>      
+<% } %>

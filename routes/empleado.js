@@ -1,7 +1,7 @@
 let express = require("express");
 let router = express.Router();
 const { ObjectId } = require("mongodb");
-const { getEmpleadoOfGerente, deleteEmpleado } = require("../db");
+const { getEmpleadoOfGerente, deleteEmpleado, getGerenteByEmail } = require("../db");
 
 const {
   getDocs,  
@@ -28,7 +28,7 @@ router.put("/empleado/:id", (req, res) => {
   });
 });
 
-router.post("/borrar/", async (req, res) => {
+router.post("/borrar/", isAuthenticateGerente,async (req, res) => {
   const object = await req.body;
   console.log(object._id);
   deleteEmpleado({ _id: ObjectId(object._id) });
@@ -48,15 +48,35 @@ router.post("/borrar/", async (req, res) => {
 //});
 
 
-router.get("/gerente/crearEmpleado", async (req, res) => {
+router.get("/gerente/crearEmpleado", isAuthenticateGerente, async (req, res) => {
   res.render("creacionEmpleados");
 });
 
 
-router.get("/gerente/empleados", async (req, res) => {
+router.get("/gerente/empleados", isAuthenticateGerente, async (req, res) => {
   const gerente = await req.user;
   const empleados = await getEmpleadoOfGerente(gerente[0]._id);
   res.render("empleados", { empleados: empleados });
 });
+
+
+async function isAuthenticateGerente(req, res, next) {
+  const user = await req.user;
+
+  if (user) {
+    const gerente = await getGerenteByEmail(user[0].email);
+    // console.log(gerente);
+    if (req.isAuthenticated() && gerente.length >= 1) return next();
+    else {
+      req.flash("signinMessage", "Credenciales no validas"),
+      res.redirect("/authentication/signin");
+      return;
+    }
+  } else {
+    req.flash("signinMessage", "Credenciales no validas"),
+    res.redirect("/authentication/signin");
+    return;
+  }
+}
 
 module.exports = router;

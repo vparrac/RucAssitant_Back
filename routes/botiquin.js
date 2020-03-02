@@ -16,6 +16,7 @@ router.get("/", isAuthenticateGerente, (req, res) => {
   });
 });
 
+
 router.get("/dibujarBotiquin", isAuthenticateGerente, (req, res) => {
   //console.log("dibujar");
   getDocs("botiquin").then(docs => {
@@ -68,6 +69,9 @@ router.put("/editar/:id", isAuthenticateGerente, (req, res) => {
     res.send(response);
   });
 });
+
+
+//router.post("/realizarRevision")
 
 router.get("/revisionesPendientes", isAuthenticateEmpleado, async (req, res) => {
   const user = await req.user;

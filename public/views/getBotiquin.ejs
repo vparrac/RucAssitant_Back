@@ -92,8 +92,12 @@
                     <td> <%= botiquin.termometro %> </td>
                     <td> <%= botiquin.alcohol %> </td>
                     <td class="table-inline"> 
-                        <button id="detalle" class="btn btn-primary" onclick="mostrarDetalle('<%= botiquin._id %>')"><i
+
+                        <form action="/revision/listRevisiones" method="POST">
+                        <button id="detalle" type="submit" class="btn btn-primary"><i
                                 class="fa fa-search"></i></button>
+                        </form>
+
                         <button id="reabastecer" class="btn btn-primary" onclick="reabastecer('<%= botiquin._id %>')"><i
                                 class="fa fa-refresh"></i></button>
                     </td>
@@ -103,3 +107,10 @@
         </table>
     </div>
 
+    <% if (botiquines.length<=0){ %> 
+        <div class="card text-white bg-success">
+          <div class="card-body">
+            No tienes botiquines registrados
+          </div>
+        </div>      
+      <% } %>

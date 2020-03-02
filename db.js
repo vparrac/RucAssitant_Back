@@ -45,6 +45,19 @@ const getDocById = (id, dbCollection) => {
     .toArray();
 };
 
+const getRevisionesByGerente = (idGerente) => {
+  const collection = db.collection("revision");
+  return collection
+    .find({
+
+      estado: "completado"
+    })
+    .toArray();
+};
+
+
+
+
 
 const getBotiquinesByGerente = (idGerente)=>{
   const collection= db.collection("botiquin");
@@ -187,5 +200,6 @@ module.exports = {
   insertEmpleadoOfGerente,
   getEmpleadoOfGerente,
   deleteEmpleado,
-  findRevisionesByEmpleado
+  findRevisionesByEmpleado,
+  getRevisionesByGerente
 };
