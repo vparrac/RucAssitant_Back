@@ -1,11 +1,11 @@
 <%- layout('profiles') %>
-
+    <!-- laupardo: Agregar required para que no deje meter botiquín sin nombre -->
     <h1> Creación de un botiquín reglamentario</h1>
     <form action="/botiquin/crear" method="POST">      
         <div class="form-group">
         <label id="nombre"> Nombre                 
         </label>
-        <input type="text" name="nombre" class="form-control" aria-label="Small" aria-describedby="inputG roup-sizing-sm">
+        <input type="text" name="nombre" class="form-control" aria-label="Small" aria-describedby="inputG roup-sizing-sm" required>
       </div>
       
       <div class="form-group">
