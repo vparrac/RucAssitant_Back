@@ -1,4 +1,4 @@
-
+// Se dejo documentado este archivo seguramente o falta borrarlo o desdocumentarlo
 //TODO HACER ESTO
 /*
 document.onload(function() { 
