@@ -112,22 +112,13 @@ router.put("/editar/:id", isAuthenticateGerente, async (req, res) => {
   });
 });
 
+/*laupardo: Si los atributos de obj y botiquin son iguales podrían considerar hacer esto de 
+manera iterativa o igualar obj a botiquin[0] y ahorrarse unas líneas de código.
+*/
 router.post("/registrarExt", async (req, res) => {
   getDocById(req.body.botiquin, "botiquin").then(botiquin => {
-    const obj = {
-      gasas: botiquin[0].gasas,
-      esparadrapo4Metros: botiquin[0].esparadrapo4Metros,
-      bajaLenguas: botiquin[0].bajaLenguas,
-      guantesLatex: botiquin[0].guantesLatex,
-      vendaEl2x5: botiquin[0].vendaEl2x5,
-      vendaEl3x5: botiquin[0].vendaEl3x5,
-      vendaEl5x5: botiquin[0].vendaEl5x5,
-      vendaAl3x5: botiquin[0].vendaAl3x5,
-      yodopovidona120: botiquin[0].yodopovidona120,
-      solucionSal: botiquin[0].solucionSal,
-      termometro: botiquin[0].termometro,
-      alcohol: botiquin[0].alcohol,
-    };
+    
+    const obj = botiquin[0];
     if (req.body.gasas >= obj.gasas) {
       obj.gasas = 0;
     } else {
