@@ -1,4 +1,9 @@
 /**
+  * La documentacion de esta parte es muy buena y ayuda a entender mucho mas facil el codigo y las dependencias que se utilizan
+  */
+
+
+/**
  * La dependencia de express
  */
 const express = require("express");
@@ -146,6 +151,7 @@ const  esGerente = async(req)=>{
 /**
  * Se configuran los paths de la aplicación
  */
+
 app.use(express.static("public"));
 app.use("/", indexRouter);
 app.use("/botiquin", botiquinRouter);
