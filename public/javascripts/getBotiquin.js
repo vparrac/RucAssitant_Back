@@ -9,7 +9,7 @@ const showBotiquin = botiquin => {
     .then(res => res.json())
     .then(showRevisiones);
 };
-
+//laupardo: revisar si se podría hace un for in para revisón y sus variables internas, puede que acorte el código//
 const showRevisiones = revisiones => {
   if (revisiones) {
     document.querySelector("#tableDetalle").style.display = "block";
